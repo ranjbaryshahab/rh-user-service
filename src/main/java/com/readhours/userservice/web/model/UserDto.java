@@ -1,5 +1,6 @@
 package com.readhours.userservice.web.model;
 
+import com.readhours.userservice.validations.ValidationGroups;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,10 +21,12 @@ public class UserDto {
     @Null
     private UUID id;
 
-    @NotBlank
+    @NotBlank(groups = ValidationGroups.Create.class)
+    @Null(groups = ValidationGroups.Update.class)
     private String email;
 
-    @NotBlank
+    @NotBlank(groups = ValidationGroups.Create.class)
+    @Null(groups = ValidationGroups.Update.class)
     private String username;
 
     @NotNull
