@@ -6,5 +6,5 @@ public interface UserService {
     UserDto getUserByUsername(String username);
     UserDto register(UserDto userDto);
     UserDto changePassword(String username, String password);
-    Integer delete(String username);
+    void delete(String username);
 }

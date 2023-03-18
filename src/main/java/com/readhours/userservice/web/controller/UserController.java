@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PutMapping("/delete/{username}")
-    public ResponseEntity<Integer> delete(@NotNull @PathVariable("username") String username){
-        return new ResponseEntity<>(userService.delete(username), HttpStatus.OK);
+    public void delete(@NotNull @PathVariable("username") String username){
+        userService.delete(username);
     }
 }

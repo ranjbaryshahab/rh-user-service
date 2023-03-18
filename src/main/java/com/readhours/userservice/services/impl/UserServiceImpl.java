@@ -1,5 +1,7 @@
 package com.readhours.userservice.services.impl;
 
+import com.readhours.userservice.domain.User;
+import com.readhours.userservice.exceptions.UsernameNotFoundException;
 import com.readhours.userservice.repositories.UserRepository;
 import com.readhours.userservice.services.UserService;
 import com.readhours.userservice.web.mappers.UserMapper;
@@ -7,7 +9,6 @@ import com.readhours.userservice.web.model.UserDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Service
@@ -23,9 +24,13 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto getUserByUsername(String username) {
-        return userMapper.UserToUserDto(
-                userRepository.findByUsernameAndDeletedAtIsNull(username)
-        );
+        User user = userRepository.findByUsernameAndDeletedAtIsNull(username);
+
+        if (user != null) {
+            return userMapper.UserToUserDto(user);
+        }
+
+        throw new UsernameNotFoundException();
     }
 
     @Override
@@ -44,18 +49,17 @@ public class UserServiceImpl implements UserService {
             user.setPassword(password);
             return register(user);
         }
-        return null;
+        throw new UsernameNotFoundException();
     }
 
     @Override
     @Transactional
-    public Integer delete(String username) {
+    public void delete(String username) {
         UserDto user = getUserByUsername(username);
         if (user != null) {
             user.setDeletedAt(OffsetDateTime.now());
             register(user);
-            return 1;
         }
-        return 0;
+        throw new UsernameNotFoundException();
     }
 }
