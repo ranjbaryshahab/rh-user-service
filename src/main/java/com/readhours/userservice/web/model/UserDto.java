@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
-import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Data
@@ -29,11 +29,11 @@ public class UserDto {
     private String password;
 
     @Null
-    private Timestamp createdAt;
+    private OffsetDateTime createdAt;
 
     @Null
-    private Timestamp updatedAt;
+    private OffsetDateTime updatedAt;
 
     @Null
-    private Timestamp deletedAt;
+    private OffsetDateTime deletedAt;
 }
