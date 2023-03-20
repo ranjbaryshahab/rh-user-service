@@ -37,6 +37,7 @@ public class UserDto {
 
     @NotNull
     @Size(min = 8, max = 36)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Null
