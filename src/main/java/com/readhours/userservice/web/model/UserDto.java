@@ -5,12 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -34,11 +33,11 @@ public class UserDto {
     private String password;
 
     @Null
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt;
 
     @Null
-    private OffsetDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     @Null
-    private OffsetDateTime deletedAt;
+    private LocalDateTime deletedAt;
 }

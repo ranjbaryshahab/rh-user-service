@@ -9,7 +9,7 @@ import com.readhours.userservice.web.model.UserDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     public void delete(String username) {
         UserDto user = getUserByUsername(username);
         if (user != null) {
-            user.setDeletedAt(OffsetDateTime.now());
+            user.setDeletedAt(LocalDateTime.now());
             register(user);
         }
         throw new UsernameNotFoundException();
